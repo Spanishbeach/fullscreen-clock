@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全屏时钟</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000000;
+            color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        #clock {
+            font-size: 180px;  /* 大字体 */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="clock">00:00:00</div>
+
+    <script>
+        // 设置全屏模式
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                elem.msRequestFullscreen();
+            }
+        }
+
+        // 退出全屏模式
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { /* Firefox */
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { /* Chrome, Safari & Opera */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE/Edge */
+                document.msExitFullscreen();
+            }
+        }
+
+        // 切换全屏模式
+        function toggleFullscreen(event) {
+            if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+                exitFullscreen();
+            } else {
+                enterFullscreen();
+            }
+        }
+
+        // 更新时钟显示
+        function updateClock() {
+            const clockElement = document.getElementById('clock');
+            const currentTime = new Date().toLocaleTimeString();
+            clockElement.textContent = currentTime;
+        }
+
+        // 监听 F11 键进行全屏切换
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'F11') {
+                toggleFullscreen();
+            }
+        });
+
+        // 启动时钟更新
+        setInterval(updateClock, 1000);
+
+        // 页面加载后自动进入全屏模式
+        window.onload = function() {
+            enterFullscreen();
+        }
+    </script>
+</body>
+</html>
