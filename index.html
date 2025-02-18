@@ -98,13 +98,6 @@
             }, 2000);
         }
 
-        // 监听 F11 键进行全屏切换
-        window.addEventListener('keydown', function(event) {
-            if (event.key === 'F11') {
-                toggleFullscreen();
-            }
-        });
-
         // 监听鼠标移动或键盘操作来显示提示
         window.addEventListener('mousemove', showFullscreenTip);
         window.addEventListener('keydown', showFullscreenTip);
