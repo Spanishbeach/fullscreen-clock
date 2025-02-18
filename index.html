@@ -80,12 +80,17 @@
         }
 
         // 更新时钟显示
-        function updateClock() {
+       
+    function updateClock() {
             const clockElement = document.getElementById('clock');
-            const currentTime = new Date().toLocaleTimeString();
+            const currentTime = new Date().toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
             clockElement.textContent = currentTime;
         }
-
         // 显示全屏提示
         function showFullscreenTip() {
             const tipElement = document.getElementById('fullscreenTip');
